@@ -1,0 +1,18 @@
+{
+  "name": "blogs",
+  "version": "1.0.0",
+  "description": "blogs服务端",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
