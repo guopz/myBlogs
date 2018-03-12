@@ -4,7 +4,7 @@
   "description": "blogs服务端",
   "main": "index.js",
   "scripts": {
-    "dev": "node app.js"
+    "dev": "supervisor app.js"
   },
   "repository": {
     "type": "git",
@@ -14,5 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.18.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "silly-datetime": "^0.1.2",
+    "supervisor": "^0.12.0"
   }
 }

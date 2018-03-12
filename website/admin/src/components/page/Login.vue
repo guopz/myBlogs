@@ -19,6 +19,7 @@
 </template>
 
 <script>
+    var config = require('../utils/config');
     export default {
         data: function(){
             return {
@@ -39,14 +40,27 @@
         methods: {
             submitForm(formName) {
                 const self = this;
+                console.log(config);
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
-                        localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
-                    } else {
-                        console.log('error submit!!');
-                        return false;
-                    }
+                        
+                        var url = config;
+                        
+                        var _data = {
+                            name:self.ruleForm.username,
+                            pwd:self.ruleForm.password
+                        };
+                        self.$axios.post(url, _data).then(function(res) {
+                                console.log(res);
+                            }).catch(function(error){
+                                console.log(error);
+                            });
+                            // localStorage.setItem('ms_username',self.ruleForm.username);
+                            // self.$router.push('/readme');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
                 });
             }
         }
