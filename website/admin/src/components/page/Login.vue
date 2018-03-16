@@ -40,7 +40,7 @@
         methods: {
             submitForm(formName) {
                 const self = this;
-                console.log(ajax_url);
+                // console.log(ajax_url);
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
                         let url = ajax_url.login;
@@ -51,7 +51,7 @@
                         self.$axios.post(url, _data).then(function(res) {
                                 let result = res.data;
                                 if (result.status && result.name) {
-                                    localStorage.setItem('ms_username', result.name);
+                                    localStorage.setItem('ms_username', JSON.stringify(result));
                                     self.$router.push('/readme');
                                 } else {
                                     alert(result.msg);

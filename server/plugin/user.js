@@ -10,17 +10,17 @@ module.exports.login = {
 
         var postData = {
             name: req.body.name
-        }
+        };
 
         var postMsg = {
             status: false,
             msg: ''
-        }
+        };
 
         ModelUser.findOne(postData, function(err, data) {
             if (err) {
                 console.log(err);
-            }
+            };
 
             if (!data) {
                 postMsg.msg = Msg.login.error_a;
@@ -33,6 +33,7 @@ module.exports.login = {
                     postMsg.msg = Msg.login.success;
                     postMsg.status = true;
                     postMsg._id = data._id;
+                    postMsg.name = data.name;
                     res.send(postMsg);
 
                 } else {

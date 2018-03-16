@@ -22,9 +22,16 @@
             }
         },
         computed:{
+            
             username(){
-                let username = localStorage.getItem('ms_username');
-                return username ? username : this.name;
+                const self = this;
+                let username = JSON.parse(localStorage.getItem('ms_username'));
+                if (username && username.name) {
+                    return username.name;
+                } else {
+                    self.$router.push('/login');
+                }
+                // return username ? username : this.name;
             }
         },
         methods:{

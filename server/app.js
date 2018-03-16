@@ -7,8 +7,8 @@ var express = require('express'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session);
 
-var index = require('./routes/index');
-user = require('./routes/user');
+var index = require('./routes/index'),
+    user = require('./routes/user');
 mongoose.connect('mongodb://localhost/myblog');
 app.use(session({
     secret: 'iqjmvh-178fd-fwh9f-cfenp',
@@ -44,11 +44,11 @@ app.use(function(req, res, next) {
 
 // app.use('/index', index);
 app.use('/user', user);
-app.post('/name', function(req, res, next) {
-    console.log(req.body);
-    res.json(req.body);
-    next();
-});
+// app.post('/name', function(req, res, next) {
+//     console.log(req.body);
+//     res.json(req.body);
+//     next();
+// });
 
 // index(express);
 
