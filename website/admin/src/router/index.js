@@ -20,12 +20,16 @@ export default new Router({
                     component: resolve => require(['../components/page/BaseTable.vue'], resolve)
                 },
                 {
-                    path: '/vuetable',
-                    component: resolve => require(['../components/page/VueTable.vue'], resolve) // vue-datasource组件
+                    path: '/article',
+                    component: resolve => require(['../components/page/Article.vue'], resolve)
                 },
                 {
                     path: '/baseform',
                     component: resolve => require(['../components/page/BaseForm.vue'], resolve)
+                },
+                {
+                    path: '/vuetable',
+                    component: resolve => require(['../components/page/VueTable.vue'], resolve) // vue-datasource组件
                 },
                 {
                     path: '/vueeditor',

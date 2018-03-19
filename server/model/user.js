@@ -1,11 +1,23 @@
-var mongoose = require("mongoose");
+let mongoose = require("mongoose"),
+    Schema = mongoose.Schema;
 
-var userSchema = new mongoose.Schema({
-	name:{
-		type:String,
-		unique:true // 禁止重复
-	},
-	password:String
+let userSchema = new Schema({
+    name: {
+        type: String,
+        unique: true // 禁止重复
+    },
+    password: String,
+    createTime: {
+        type: Date,
+        default: Date.now
+    },
+    updateTime: {
+        type: Date,
+        default: Date.now
+    }
+}, {
+    versionKey: false,
+    timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' }
 });
 
-module.exports = mongoose.model('user',userSchema);
+module.exports = mongoose.model('user', userSchema);

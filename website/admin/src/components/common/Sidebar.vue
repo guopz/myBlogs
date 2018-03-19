@@ -36,57 +36,57 @@
                     },
                     {
                         icon: 'el-icon-date',
-                        index: 'baseform',
+                        index: 'article',
                         title: '发布文章'
                     },
-                    // {
-                    //     icon: 'el-icon-menu',
-                    //     index: '2',
-                    //     title: '表格',
-                    //     subs: [
-                    //         {
-                    //             index: 'basetable',
-                    //             title: '文档列表'
-                    //         },
-                    //         {
-                    //             index: 'vuetable',
-                    //             title: 'Vue表格组件'
-                    //         }
-                    //     ]
-                    // },
-                    // {
-                    //     icon: 'el-icon-date',
-                    //     index: '3',
-                    //     title: '表单',
-                    //     subs: [
-                    //         {
-                    //             index: 'baseform',
-                    //             title: '基本表单'
-                    //         },
-                    //         {
-                    //             index: 'vueeditor',
-                    //             title: '编辑器'
-                    //         },
-                    //         {
-                    //             index: 'markdown',
-                    //             title: 'markdown'
-                    //         },
-                    //         {
-                    //             index: 'upload',
-                    //             title: '文件上传'
-                    //         }
-                    //     ]
-                    // },
-                    // {
-                    //     icon: 'el-icon-star-on',
-                    //     index: 'basecharts',
-                    //     title: '图表'
-                    // },
-                    // {
-                    //     icon: 'el-icon-upload2',
-                    //     index: 'drag',
-                    //     title: '拖拽'
-                    // }
+                    {
+                        icon: 'el-icon-menu',
+                        index: '2',
+                        title: '表格',
+                        subs: [
+                            {
+                                index: 'basetable',
+                                title: '文档列表'
+                            },
+                            {
+                                index: 'vuetable',
+                                title: 'Vue表格组件'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-date',
+                        index: '3',
+                        title: '表单',
+                        subs: [
+                            {
+                                index: 'baseform',
+                                title: '基本表单'
+                            },
+                            {
+                                index: 'vueeditor',
+                                title: '编辑器'
+                            },
+                            {
+                                index: 'markdown',
+                                title: 'markdown'
+                            },
+                            {
+                                index: 'upload',
+                                title: '文件上传'
+                            }
+                        ]
+                    },
+                    {
+                        icon: 'el-icon-star-on',
+                        index: 'basecharts',
+                        title: '图表'
+                    },
+                    {
+                        icon: 'el-icon-upload2',
+                        index: 'drag',
+                        title: '拖拽'
+                    }
                 ]
             }
         },
