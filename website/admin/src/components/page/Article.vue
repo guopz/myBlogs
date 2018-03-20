@@ -63,6 +63,8 @@
 
 <script>
     import { markdownEditor } from 'vue-simplemde';
+    let ajax_url = require('../utils/config');
+
     export default {
         data: function(){
             return {
@@ -72,12 +74,14 @@
                     c_author: '',
                     d_desc: '',
                     dynamicTags: ['日常记录','生活'],
+                    uid: '',
                 },
                 errorInfrom: {
                     a_title: '请填写文章标题',
                     b_source: '请填写文章来源',
                     c_author: '请填写文章作者',
-                    d_desc: '请填写文章内容'
+                    d_desc: '请填写文章内容',
+                    uid:'退出后重新登录'
                 },
                 inputVisible: false,
                 inputValue: '',
@@ -93,6 +97,7 @@
         },
         methods: {
             onSubmit() {
+                const self = this;
                 for(let name in this.form) {
                     let val = this.form[name]
                    if (!val) {
@@ -100,8 +105,26 @@
                        return;
                    }
                 };
-                this.$message.success('提交成功！');
-                console.log(this.form);
+                
+                let username = JSON.parse(localStorage.getItem('ms_username'));
+                if (!username || !username._id) {
+                    self.$router.push('/login');
+                };
+                console.log(username);
+                self.form.uid = username._id;
+                // this.$message.success('提交成功！');
+                // 提交数据
+                self.$axios.post(ajax_url.list,this.form).then((res) => {
+                    let result = res.data;
+                    if(!result.status) {
+                        self.$message.error(result.msg);
+                    } else {
+                        self.$message.success(result.msg);
+                        self.form = {};
+                        // self.$router.push('/readme');
+                    }                   
+                });
+
             },
             handleClose(tag) {
                 this.form.dynamicTags.splice(this.form.dynamicTags.indexOf(tag), 1);

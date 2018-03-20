@@ -1,5 +1,5 @@
-var ModelUser = require("../model/user");
-var Msg = require("../model/msg");
+let ModelUser = require("../model/user"),
+    Msg = require("../model/msg");
 
 // login 对象
 module.exports.login = {
@@ -14,26 +14,27 @@ module.exports.login = {
 
         var postMsg = {
             status: false,
-            msg: ''
+            msg: '',
+            data: {}
         };
 
         ModelUser.findOne(postData, function(err, data) {
             if (err) {
                 console.log(err);
             };
-
+            console.log(postMsg);
             if (!data) {
                 postMsg.msg = Msg.login.error_a;
                 res.send(postMsg);
             } else {
-                console.log(data);
+
                 if (data.password === req.body.password) {
 
                     req.session.user = data;
                     postMsg.msg = Msg.login.success;
                     postMsg.status = true;
-                    postMsg._id = data._id;
-                    postMsg.name = data.name;
+                    postMsg.data._id = data._id;
+                    postMsg.data.name = data.name;
                     res.send(postMsg);
 
                 } else {
@@ -58,17 +59,17 @@ module.exports.reg = {
         var postData = {
             name: req.body.name,
             password: req.body.password
-        }
-        console.log(postData);
+        };
+
         var resJson = {
-                status: false,
-                msg: ''
-            }
-            // 判断注册用户用户名是否相同
+            status: false,
+            msg: ''
+        };
+        // 判断注册用户用户名是否相同
         ModelUser.findOne({ name: req.body.name }, function(err, data) {
             if (err) {
                 console.log(err);
-            }
+            };
 
             if (data) {
                 resJson.msg = '此用户已经被注册！';
@@ -82,8 +83,8 @@ module.exports.reg = {
                         // console.log(resJson);
                     }
 
-                    resJson.msg = '注册成功！';
                     resJson.status = true;
+                    resJson.msg = '注册成功！';
                     resJson._id = data._id;
                     req.session.user = data;
                     // res.redirect('/user/'+ data._id);

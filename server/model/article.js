@@ -11,7 +11,18 @@ var blogSchema = new Schema({
     source: String,
     title: String,
     content: String,
-    dynamicTags: String,
+    dynamicTags: [],
+    createTime: {
+        type: Date,
+        default: Date.now
+    },
+    updateTime: {
+        type: Date,
+        default: Date.now
+    }
+}, {
+    versionKey: false,
+    timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' }
 });
 
 module.exports = mongoose.model('article', blogSchema);

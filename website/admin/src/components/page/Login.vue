@@ -19,7 +19,8 @@
 </template>
 
 <script>
-    var ajax_url = require('../utils/config');
+    let ajax_url = require('../utils/config');
+    
     export default {
         data: function(){
             return {
@@ -40,21 +41,24 @@
         methods: {
             submitForm(formName) {
                 const self = this;
-                // console.log(ajax_url);
+                
                 self.$refs[formName].validate((valid) => {
+                    
                     if (valid) {
                         let url = ajax_url.login;
                         let _data = {
                             name:self.ruleForm.username,
                             password:self.ruleForm.password
                         };
+                        
                         self.$axios.post(url, _data).then(function(res) {
                                 let result = res.data;
-                                if (result.status && result.name) {
-                                    localStorage.setItem('ms_username', JSON.stringify(result));
+                                if (result.status && result.data) {
+                                    self.$message.success(result.msg);
+                                    localStorage.setItem('ms_username', JSON.stringify(result.data));
                                     self.$router.push('/readme');
                                 } else {
-                                    alert(result.msg);
+                                    self.$message.error(result.msg);
                                 };
                             }).catch(function(error){
                                 console.log(error);

@@ -29,33 +29,15 @@ var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
 };
+
 app.use(allowCrossDomain);
-app.use(function(req, res, next) {
-    var user = req.session.user;
-    if (user) {
-        app.locals.user = user;
-    } else {
-        app.locals.user = user;
-    };
-    // app.locals.ceshi = "测试用！"; 
-    // 在前台通过 <%= ceshi%> 调用
-    next();
-});
-
-// app.use('/index', index);
+app.use('/list', index);
 app.use('/user', user);
-// app.post('/name', function(req, res, next) {
-//     console.log(req.body);
-//     res.json(req.body);
-//     next();
-// });
-
-// index(express);
 
 var port = 3030;
 var server = app.listen(port, function() {
     var host = server.address().address;
     var port = server.address().port;
     // console.log(server.address());
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('Website app listening at http://%s:%s', host, port);
 });

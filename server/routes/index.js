@@ -1,17 +1,10 @@
-// var PluginUser = require("../plugin/user");
+var express = require('express'),
+    routes = express.Router(),
+    utils = require('../utils/common'),
+    PluginArticle = require("../plugin/article");
 
-// var app = function(express) {
+utils.log('list');
 
-//     // 同一调用中间件 无论调用下面哪一个路由都需要
-//     var routes = express.Router()
-//         // login
-//         // app.post('/user/login', PluginUser.login.post);
-//     console.log(111);
-//     routes.post('/login', function(req, res, next) {
-//         // success
-//         console.log(req.body);
-//         res.json(req.body);
-//     });
-// }
+routes.post('/article', PluginArticle.article.post);
 
-// module.exports = app;
+module.exports = routes;
