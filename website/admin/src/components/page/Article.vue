@@ -98,6 +98,12 @@
         methods: {
             onSubmit() {
                 const self = this;
+                let username = JSON.parse(localStorage.getItem('ms_username'));
+                if (!username || !username._id) {
+                    self.$router.push('/login');
+                };
+                self.form.uid = username._id;
+                console.log(username);
                 for(let name in this.form) {
                     let val = this.form[name]
                    if (!val) {
@@ -106,12 +112,6 @@
                    }
                 };
                 
-                let username = JSON.parse(localStorage.getItem('ms_username'));
-                if (!username || !username._id) {
-                    self.$router.push('/login');
-                };
-                console.log(username);
-                self.form.uid = username._id;
                 // this.$message.success('提交成功！');
                 // 提交数据
                 self.$axios.post(ajax_url.list,this.form).then((res) => {
