@@ -11,7 +11,7 @@ let article = {
             content: req.body.d_desc,
             uid: req.body.uid,
         };
-
+        console.log(postDate);
         ModelArticle.findOne({ title: postDate.title }, function(err, data) {
             if (err) {
                 console.log(err);

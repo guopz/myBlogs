@@ -3,7 +3,7 @@ let mongoose = require("mongoose"),
     ObjectId = Schema.Types.ObjectId;
 
 var blogSchema = new Schema({
-    _uid: {
+    uid: {
         type: ObjectId,
         ref: 'user'
     },

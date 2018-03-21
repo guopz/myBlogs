@@ -3,7 +3,11 @@
 module.exports.postMsg = {
     status: false,
     msg: '',
-    data: {}
+    code: '',
+    data: {
+        link: '',
+        data: {}
+    }
 }
 
 module.exports.editor = {
@@ -21,4 +25,15 @@ module.exports.reg = {
     success: '注册成功！',
     error: '注册异常！',
     error_a: '此用户已经被注册！'
+}
+
+module.exports.postData = function(status, msg, link = '', data = {}) {
+    let postMsg = {
+        status: status,
+        msg: msg,
+        data: {
+            link: link,
+            data: data
+        }
+    }
 }
