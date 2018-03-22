@@ -31,7 +31,7 @@
                     },
                     {
                         icon: 'el-icon-menu',
-                        index: 'basetable',
+                        index: 'articlelist',
                         title: '文档列表',
                     },
                     {

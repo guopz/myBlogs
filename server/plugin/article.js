@@ -11,26 +11,24 @@ let article = {
             content: req.body.d_desc,
             uid: req.body.uid,
         };
-        console.log(postDate);
+
         ModelArticle.findOne({ title: postDate.title }, function(err, data) {
+
             if (err) {
                 console.log(err);
+                Msg.postData(res, false, '系统错误', '');
             };
 
-            Msg.postMsg.status = false;
-
             if (data) {
-                Msg.postMsg.msg = '文章标题已存在！';
-                res.json(Msg.postMsg);
+                Msg.postData(res, false, '文章标题已存在！', '');
             } else {
                 ModelArticle.create(postDate, function(err, data) {
+
                     if (err) {
-                        Msg.postMsg.msg = '系统错误';
-                        res.json(Msg.postMsg);
+                        console.log(err);
+                        Msg.postData(res, false, '系统错误', '');
                     } else {
-                        Msg.postMsg.status = true;
-                        Msg.postMsg.msg = 'success';
-                        res.json(Msg.postMsg);
+                        Msg.postData(res, true, 'success', '/basetable');
                     }
                 });
             };
@@ -38,4 +36,19 @@ let article = {
     }
 };
 
+let show = {
+    post(req, res, next) {
+        let uid = req.body.uid;
+        // 查询用户发布文章
+        ModelArticle.find({ uid: uid }, (err, data) => {
+            if (err) {
+                Msg.postData(res, false, '系统错误', '');
+            };
+            console.log(data);
+            Msg.postData(res, true, 'success', '', data);
+        });
+    }
+}
+
 module.exports.article = article;
+module.exports.show = show;

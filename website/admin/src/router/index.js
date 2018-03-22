@@ -16,12 +16,16 @@ export default new Router({
                     component: resolve => require(['../components/page/Readme.vue'], resolve)
                 },
                 {
-                    path: '/basetable',
-                    component: resolve => require(['../components/page/BaseTable.vue'], resolve)
+                    path: '/articlelist',
+                    component: resolve => require(['../components/page/ArticleList.vue'], resolve)
                 },
                 {
                     path: '/article',
                     component: resolve => require(['../components/page/Article.vue'], resolve)
+                },
+                {
+                    path: '/basetable',
+                    component: resolve => require(['../components/page/BaseTable.vue'], resolve)
                 },
                 {
                     path: '/baseform',

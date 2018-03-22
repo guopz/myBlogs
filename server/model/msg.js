@@ -3,7 +3,6 @@
 module.exports.postMsg = {
     status: false,
     msg: '',
-    code: '',
     data: {
         link: '',
         data: {}
@@ -27,7 +26,7 @@ module.exports.reg = {
     error_a: '此用户已经被注册！'
 }
 
-module.exports.postData = function(status, msg, link = '', data = {}) {
+module.exports.postData = function(res, status, msg, link = '', data = {}) {
     let postMsg = {
         status: status,
         msg: msg,
@@ -36,4 +35,5 @@ module.exports.postData = function(status, msg, link = '', data = {}) {
             data: data
         }
     }
+    res.json(postMsg);
 }

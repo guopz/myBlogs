@@ -5,7 +5,8 @@ let config_url = {
         register: 'user/register'
     },
     index: {
-        list: 'list/article'
+        list: 'list/article',
+        show: 'list/show'
     }
 };
 let config = {};
@@ -15,5 +16,5 @@ for (let name in config_url) {
         config[name2] = url + config_url[name][name2];
     }
 }
-
+console.log(config);
 module.exports = config;

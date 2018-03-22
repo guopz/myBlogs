@@ -121,7 +121,7 @@
                     } else {
                         self.$message.success(result.msg);
                         self.form = {};
-                        // self.$router.push('/readme');
+                        self.$router.push(result.data.link);
                     }                   
                 });
 
