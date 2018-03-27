@@ -20,6 +20,7 @@
     "connect-mongo": "^2.0.1",
     "express-session": "^1.15.6",
     "fs": "^0.0.1-security",
+    "moment": "^2.21.0",
     "mongoose": "^5.0.10",
     "path": "^0.12.7",
     "silly-datetime": "^0.1.2",

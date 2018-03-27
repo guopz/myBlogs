@@ -7,7 +7,7 @@ var express = require('express'),
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session);
 
-var index = require('./routes/index'),
+var article = require('./routes/article'),
     user = require('./routes/user');
 mongoose.connect('mongodb://localhost/myblog');
 app.use(session({
@@ -31,7 +31,7 @@ var allowCrossDomain = function(req, res, next) {
 };
 
 app.use(allowCrossDomain);
-app.use('/list', index);
+app.use('/list', article);
 app.use('/user', user);
 
 var port = 3030;

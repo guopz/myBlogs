@@ -1,5 +1,6 @@
 let ModelArticle = require("../model/article"),
-    Msg = require("../model/msg");
+    Msg = require("../model/msg"),
+    moment = require('moment');
 
 let article = {
     post: function(req, res, next) {
@@ -28,7 +29,7 @@ let article = {
                         console.log(err);
                         Msg.postData(res, false, '系统错误', '');
                     } else {
-                        Msg.postData(res, true, 'success', '/basetable');
+                        Msg.postData(res, true, 'success', '/articlelist');
                     }
                 });
             };
@@ -36,19 +37,44 @@ let article = {
     }
 };
 
+// 查询用户发布文章
 let show = {
     post(req, res, next) {
         let uid = req.body.uid;
-        // 查询用户发布文章
-        ModelArticle.find({ uid: uid }, (err, data) => {
+        ModelArticle.find({ uid: uid }, { title: 1, createTime: 1, author: 1 }, (err, data) => {
             if (err) {
                 Msg.postData(res, false, '系统错误', '');
             };
-            console.log(data);
-            Msg.postData(res, true, 'success', '', data);
+
+            let newDate = [];
+            data.forEach((item) => {
+                let itemObj = {};
+                itemObj.date = moment(item.createTime).format('YYYY-MM-DD');
+                itemObj.address = item.title;
+                itemObj.name = item.author;
+                itemObj._id = item._id;
+                newDate.push(itemObj);
+            });
+            console.log(newDate);
+            Msg.postData(res, true, 'success', '', newDate);
         });
     }
-}
+};
+
+// 删除文章
+let del = {
+    post(req, res, next) {
+        let _id = req.body._id;
+        ModelArticle.findByIdAndRemove(_id, (err, doc) => {
+            if (err) {
+                Msg.postData(res, false, '系统错误', '');
+            };
+
+            Msg.postData(res, true, 'success');
+        });
+    }
+};
 
 module.exports.article = article;
 module.exports.show = show;
+module.exports.del = del;

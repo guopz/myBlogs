@@ -4,9 +4,10 @@ let config_url = {
         login: 'user/login',
         register: 'user/register'
     },
-    index: {
+    article: {
         list: 'list/article',
-        show: 'list/show'
+        show: 'list/show',
+        del: 'list/del'
     }
 };
 let config = {};

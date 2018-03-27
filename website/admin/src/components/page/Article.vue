@@ -103,7 +103,7 @@
                     self.$router.push('/login');
                 };
                 self.form.uid = username._id;
-                console.log(username);
+                // console.log(username);
                 for(let name in this.form) {
                     let val = this.form[name]
                    if (!val) {

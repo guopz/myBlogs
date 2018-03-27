@@ -64,6 +64,7 @@
             data(){
                 const self = this;
                 return self.tableData.filter(function(d){
+                    // console.log(d);
                     let is_del = false;
                     for (let i = 0; i < self.del_list.length; i++) {
                         if(d.name === self.del_list[i].name){
@@ -90,10 +91,9 @@
             getData(){
                 let self = this;
                 if(process.env.NODE_ENV === 'development'){
-                   self.url = '/ms/table/list';
+                    // self.url = '/ms/table/list';
                     // {page:self.cur_page}
-
-                    // self.url = ajax_url.show;
+                    self.url = ajax_url.show;
                 };
 
                 // 获取 uid
@@ -103,14 +103,13 @@
                 };
                 
                 self.$axios.post(self.url, {uid:username._id}).then((res) => {
-                    // console.log(res.data);
-                    // let result = res.data;
-                    // if (result.status) {
-                    //     self.tableData = result.data.data;
-                    // } else {
-                    //     self.$message.error(result.msg);
-                    // }
-                    self.tableData = res.data.list;
+                    let result = res.data;
+                    if (result.status) {
+                        self.tableData = result.data.data;
+                    } else {
+                        self.$message.error(result.msg);
+                    };
+                    // self.tableData = res.data.list;
                 })
             },
             search(){
@@ -126,7 +125,19 @@
                 this.$message('编辑第'+(index+1)+'行');
             },
             handleDelete(index, row) {
-                this.$message.error('删除第'+(index+1)+'行');
+                // 删除数据
+                let self = this;
+                self.$axios.post( ajax_url.del , { _id : row._id }).then((res) => {
+                     let result = res.data;
+                     if (result.status)  {
+                        console.log(self.tableData);
+                        self.tableData.splice(index, 1);
+                        self.$router.push('/articlelist');
+                     } else {
+                        self.$message.error(result.msg);
+                     }   
+                });;
+               
             },
             delAll(){
                 const self = this,

@@ -22,7 +22,7 @@ module.exports.login = {
             if (err) {
                 console.log(err);
             };
-            console.log(postMsg);
+
             if (!data) {
                 postMsg.msg = Msg.login.error_a;
                 res.send(postMsg);
