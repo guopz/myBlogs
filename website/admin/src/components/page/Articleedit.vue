@@ -95,6 +95,9 @@
                 }
             }
         },
+        created() {
+            this.getData();
+        },
         methods: {
             onSubmit() {
                 const self = this;
@@ -102,7 +105,7 @@
                 if (!username || !username._id) {
                     self.$router.push('/login');
                 };
-                self.form.uid = username._id;
+                // self.form.uid = username._id;
                 // console.log(username);
                 for(let name in this.form) {
                     let val = this.form[name]
@@ -129,14 +132,12 @@
             handleClose(tag) {
                 this.form.dynamicTags.splice(this.form.dynamicTags.indexOf(tag), 1);
             },
-
             showInput() {
                 this.inputVisible = true;
                 this.$nextTick(_ => {
                 this.$refs.saveTagInput.$refs.input.focus();
                 });
             },
-
             handleInputConfirm() {
                 let inputValue = this.inputValue;
                 if (inputValue) {
@@ -145,6 +146,26 @@
                 this.inputVisible = false;
                 this.inputValue = '';
             },
+            getData() {
+                const self = this;
+                let cid = self.$route.params.cid;
+                console.log(cid);
+                self.$axios.get(ajax_url.edit+'?cid='+cid).then((res) => {
+                    let result = res.data;
+                    if (result.status) {
+                        self.form = {
+                            a_title: result.data.data.title,
+                            b_source: result.data.data.source,
+                            c_author: result.data.data.author,
+                            d_desc: result.data.data.content,
+                            dynamicTags: result.data.data.dynamicTags,
+                            cid: result.data.data._id,
+                        }
+                    } else {
+                        self.$message.error(result.msg);
+                    };
+                });
+            }
         },
         components: {
             markdownEditor

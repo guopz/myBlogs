@@ -9,4 +9,7 @@ routes.post('/article', PluginArticle.article.post);
 routes.post('/show', PluginArticle.show.post);
 routes.post('/del', PluginArticle.del.post);
 
+routes.get('/edit', PluginArticle.updata.get);
+// routes.post('/updata', PluginArticle.updata.post);
+
 module.exports = routes;

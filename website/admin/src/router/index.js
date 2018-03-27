@@ -17,12 +17,18 @@ export default new Router({
                 },
                 {
                     path: '/articlelist',
-                    component: resolve => require(['../components/page/ArticleList.vue'], resolve)
+                    component: resolve => require(['../components/page/ArticleList.vue'], resolve),
                 },
                 {
                     path: '/article',
                     component: resolve => require(['../components/page/Article.vue'], resolve)
                 },
+                {
+                    name: 'edit',
+                    path: '/articleedit/:cid',
+                    component: resolve => require(['../components/page/Articleedit.vue'], resolve)
+                },
+                // end
                 {
                     path: '/basetable',
                     component: resolve => require(['../components/page/BaseTable.vue'], resolve)

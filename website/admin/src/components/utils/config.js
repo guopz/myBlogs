@@ -5,9 +5,11 @@ let config_url = {
         register: 'user/register'
     },
     article: {
-        list: 'list/article',
+        article: 'list/article',
         show: 'list/show',
-        del: 'list/del'
+        del: 'list/del',
+        edit: 'list/edit',
+        updata: 'list/updata'
     }
 };
 let config = {};
