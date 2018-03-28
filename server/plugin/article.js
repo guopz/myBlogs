@@ -15,13 +15,14 @@ let article = {
         };
         if (req.body.cid) {
 
-            ModelArticle.update({cid: req.body.cid}, postDate, (err, doc) => {
+            ModelArticle.updateOne({ _id: req.body.cid }, { $set: postDate }, (err, doc) => {
                 if (err) {
                     console.log(err);
                     Msg.postData(res, false, '系统错误', '');
                 };
                 Msg.postData(res, true, 'success', '/articlelist');
             });
+
         } else {
 
             ModelArticle.findOne({ title: postDate.title }, function(err, data) {
@@ -46,38 +47,88 @@ let article = {
                 };
             });
         }
+        // post end
     }
 };
 
 // 查询文章
 let show = {
     post(req, res, next) {
-        let uid = req.body.uid;
-        ModelArticle.find({ uid: uid }, { title: 1, createTime: 1, author: 1 }, (err, data) => {
+        let getParams = req.body,
+            pageJson = {
+                status: true,
+                msg: 'success'
+            };
+
+        ModelArticle.find({ uid: getParams.uid }).count().exec((err, count) => {
             if (err) {
                 Msg.postData(res, false, '系统错误', '');
             };
+            getParams.page_count = getParams.page_count ? getParams.page_count : 1;
+            if (getParams.cur_count > 1) {
 
-            let newDate = [];
-            data.forEach((item) => {
-                let itemObj = {};
-                itemObj.date = moment(item.createTime).format('YYYY-MM-DD');
-                itemObj.address = item.title;
-                itemObj.name = item.author;
-                itemObj._id = item._id;
-                newDate.push(itemObj);
-            });
-            // console.log(newDate);
-            Msg.postData(res, true, 'success', '', newDate);
+                let getCount = (getParams.cur_count - 1) * getParams.page_count;
+                console.log(getCount);
+
+                ModelArticle.find({ uid: getParams.uid }, { title: 1, createTime: 1, author: 1 }).skip(getCount).limit(getParams.page_count).sort("-createTime").exec((err, data) => {
+                    if (err) {
+                        Msg.postData(res, false, '系统错误', '');
+                    };
+
+                    let newDate = [];
+                    data.forEach((item) => {
+                        let itemObj = {};
+                        itemObj.date = moment(item.createTime).format('YYYY-MM-DD');
+                        itemObj.address = item.title;
+                        itemObj.name = item.author;
+                        itemObj._id = item._id;
+                        newDate.push(itemObj);
+                    });
+
+                    pageJson.data = {
+                        list: newDate,
+                        count: count,
+                        page_count: getParams.page_count
+                    }
+                    res.json(pageJson);
+                });
+
+            } else {
+
+                ModelArticle.find({ uid: getParams.uid }, { title: 1, createTime: 1, author: 1 }).limit(getParams.page_count).sort("-createTime").exec((err, data) => {
+                    if (err) {
+                        Msg.postData(res, false, '系统错误', '');
+                    };
+
+                    let newDate = [];
+                    data.forEach((item) => {
+                        let itemObj = {};
+                        itemObj.date = moment(item.createTime).format('YYYY-MM-DD');
+                        itemObj.address = item.title;
+                        itemObj.name = item.author;
+                        itemObj._id = item._id;
+                        newDate.push(itemObj);
+                    });
+
+                    pageJson.data = {
+                        list: newDate,
+                        count: count,
+                        page_count: getParams.page_count
+                    }
+                    res.json(pageJson);
+                });
+            }
+
         });
+        // end
     }
 };
 
 let updata = {
     get(req, res, next) {
         let cid = req.query.cid;
-        ModelArticle.findById( { _id : cid } , (err, doc) => {
-            if(err) {
+        ModelArticle.findById({ _id: cid }, (err, doc) => {
+            if (err) {
                 Msg.postData(res, false, '系统错误', '');
             };
             Msg.postData(res, true, 'success', '', doc);
@@ -104,6 +155,15 @@ let del = {
                 Msg.postData(res, false, '系统错误', '');
             };
 
+            Msg.postData(res, true, 'success');
+        });
+    },
+    all(req, res, next) {
+        let getParams = req.body;
+        ModelArticle.remove({ _id: { $in: getParams._id } }, (err, doc) => {
+            if (err) {
+                Msg.postData(res, false, '系统错误', '');
+            };
             Msg.postData(res, true, 'success');
         });
     }

@@ -9,7 +9,8 @@ let config_url = {
         show: 'list/show',
         del: 'list/del',
         edit: 'list/edit',
-        updata: 'list/updata'
+        updata: 'list/updata',
+        delall: 'list/delall'
     }
 };
 let config = {};

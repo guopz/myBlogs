@@ -36,7 +36,8 @@
             <el-pagination
                     @current-change ="handleCurrentChange"
                     layout="prev, pager, next"
-                    :total="1000">
+                    :page-size="page.page_count"
+                    :total="page.count">
             </el-pagination>
         </div>
     </div>
@@ -49,12 +50,17 @@
             return {
                 url: './static/vuetable.json',
                 tableData: [],
-                cur_page: 1,
+                // cur_page: 1,
                 multipleSelection: [],
                 select_cate: '',
                 select_word: '',
                 del_list: [],
-                is_search: false
+                is_search: false,
+                page: {
+                    count: 0,
+                    cur_page: 1,
+                    page_count: 2
+                }
             }
         },
         created(){
@@ -85,7 +91,7 @@
         },
         methods: {
             handleCurrentChange(val){
-                this.cur_page = val;
+                this.page.cur_page = val;
                 this.getData();
             },
             getData(){
@@ -96,16 +102,24 @@
                     self.url = ajax_url.show;
                 };
 
-                // 获取 uid
                 let username = JSON.parse(localStorage.getItem('ms_username'));
                 if (!username || !username._id) {
                     self.$router.push('/login');
                 };
-                
-                self.$axios.post(self.url, {uid:username._id}).then((res) => {
+
+                let listParams = {
+                    uid: username._id,
+                    cur_count: self.page.cur_page,
+                    page_count: self.page.page_count
+                };
+                self.$axios.post(self.url, listParams).then((res) => {
                     let result = res.data;
                     if (result.status) {
-                        self.tableData = result.data.data;
+                        // 重置页面数据
+                        self.tableData = result.data.list;
+                        self.page.count = result.data.count;
+                        self.page.page_count = result.data.page_count;
+                        
                     } else {
                         self.$message.error(result.msg);
                     };
@@ -131,7 +145,6 @@
                 self.$axios.post( ajax_url.del , { _id : row._id }).then((res) => {
                      let result = res.data;
                      if (result.status)  {
-                        console.log(self.tableData);
                         self.tableData.splice(index, 1);
                         self.$router.push('/articlelist');
                      } else {
@@ -140,10 +153,12 @@
                 });;
                
             },
-            delAll(){
+            delAll() {
                 const self = this,
                     length = self.multipleSelection.length;
-                let str = '';
+                let str = '',
+                    params = [];
+                self.$axios.post();
                 self.del_list = self.del_list.concat(self.multipleSelection);
                 for (let i = 0; i < length; i++) {
                     str += self.multipleSelection[i].name + ' ';
@@ -152,6 +167,7 @@
                 self.multipleSelection = [];
             },
             handleSelectionChange(val) {
+                console.log(val);
                 this.multipleSelection = val;
             }
         }
