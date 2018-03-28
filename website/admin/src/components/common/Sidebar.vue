@@ -26,7 +26,7 @@
                 items: [
                     {
                         icon: 'el-icon-setting',
-                        index: 'readme',
+                        index: 'home',
                         title: '后台首页'
                     },
                     {

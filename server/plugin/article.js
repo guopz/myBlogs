@@ -155,16 +155,18 @@ let del = {
                 Msg.postData(res, false, '系统错误', '');
             };
 
-            Msg.postData(res, true, 'success');
+            Msg.postData(res, true, 'success', '',doc);
         });
     },
     all(req, res, next) {
         let getParams = req.body;
-        ModelArticle.remove({ _id: { $in: getParams._id } }, (err, doc) => {
+        console.log(getParams);
+        ModelArticle.remove({ _id: { $in: getParams } }, (err, doc) => {
             if (err) {
                 Msg.postData(res, false, '系统错误', '');
             };
-            Msg.postData(res, true, 'success');
+            console.log(doc);
+            Msg.postData(res, true, 'success', '', doc);
         });
     }
 };

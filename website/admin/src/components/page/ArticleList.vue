@@ -158,12 +158,20 @@
                     length = self.multipleSelection.length;
                 let str = '',
                     params = [];
-                self.$axios.post();
+
                 self.del_list = self.del_list.concat(self.multipleSelection);
                 for (let i = 0; i < length; i++) {
                     str += self.multipleSelection[i].name + ' ';
+                    params.push(self.multipleSelection[i]._id);
                 }
-                self.$message.error('删除了'+str);
+                console.log(params);
+                self.$axios.post(ajax_url.delall, params).then((res) => {
+                    let result = res.data;
+                    if (result.status) {
+                        self.$message.error('删除了'+str);
+                    }
+                });
+                
                 self.multipleSelection = [];
             },
             handleSelectionChange(val) {
