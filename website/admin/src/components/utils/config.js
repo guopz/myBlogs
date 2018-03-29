@@ -10,7 +10,8 @@ let config_url = {
         del: 'list/del',
         edit: 'list/edit',
         updata: 'list/updata',
-        delall: 'list/delall'
+        delall: 'list/delall',
+        date: 'list/date'
     }
 };
 let config = {};

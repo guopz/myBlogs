@@ -53,7 +53,7 @@
 
                 <el-form-item>
                     <el-button type="primary" @click="onSubmit">提交</el-button>
-                    <el-button>取消</el-button>
+                    <el-button @click="onCancle">取消</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -126,6 +126,7 @@
                 });
 
             },
+
             handleClose(tag) {
                 this.form.dynamicTags.splice(this.form.dynamicTags.indexOf(tag), 1);
             },
@@ -145,6 +146,10 @@
                 this.inputVisible = false;
                 this.inputValue = '';
             },
+
+            onCancle() {
+                this.form = {};
+            }
         },
         components: {
             markdownEditor

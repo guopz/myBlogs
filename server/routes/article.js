@@ -9,6 +9,7 @@ routes.post('/article', PluginArticle.article.post);
 routes.post('/show', PluginArticle.show.post);
 routes.post('/del', PluginArticle.del.post);
 routes.post('/delall', PluginArticle.del.all);
+routes.post('/date', PluginArticle.show.date);
 
 routes.get('/edit', PluginArticle.updata.get);
 // routes.post('/updata', PluginArticle.updata.post);

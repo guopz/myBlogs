@@ -26,17 +26,17 @@
                 items: [
                     {
                         icon: 'el-icon-setting',
-                        index: 'home',
+                        index: '/home',
                         title: '后台首页'
                     },
                     {
                         icon: 'el-icon-menu',
-                        index: 'articlelist',
+                        index: '/home/articlelist',
                         title: '文档列表',
                     },
                     {
                         icon: 'el-icon-date',
-                        index: 'article',
+                        index: '/home/article',
                         title: '发布文章'
                     },
                     // {
@@ -92,7 +92,7 @@
         },
         computed:{
             onRoutes(){
-                return this.$route.path.replace('/','');
+               return this.$route.path.replace('/','');
             }
         }
     }

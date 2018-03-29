@@ -136,7 +136,7 @@
                 return row.tag === value;
             },
             handleEdit(index, row) {
-                this.$router.push(`/articleedit/${row._id}`);
+                this.$router.push(`/home/articleedit/${row._id}`);
                 // this.$message('编辑第'+(index+1)+'行');
             },
             handleDelete(index, row) {

@@ -52,8 +52,8 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
-                    <el-button>取消</el-button>
+                    <el-button type="primary" @click="onSubmit">保存</el-button>
+                    <el-button @click="onCancle">取消</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -149,7 +149,7 @@
             getData() {
                 const self = this;
                 let cid = self.$route.params.cid;
-                console.log(cid);
+                // console.log(cid);
                 self.$axios.get(ajax_url.edit+'?cid='+cid).then((res) => {
                     let result = res.data;
                     if (result.status) {
@@ -165,6 +165,9 @@
                         self.$message.error(result.msg);
                     };
                 });
+            },
+            onCancle() {
+                this.$router.push('/home/articlelist');
             }
         },
         components: {

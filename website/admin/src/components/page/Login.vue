@@ -56,7 +56,7 @@
                                 if (result.status && result.data) {
                                     self.$message.success(result.msg);
                                     localStorage.setItem('ms_username', JSON.stringify(result.data));
-                                    self.$router.push('/readme');
+                                    self.$router.push('/home');
                                 } else {
                                     self.$message.error(result.msg);
                                 };

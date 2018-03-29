@@ -20,7 +20,7 @@ let article = {
                     console.log(err);
                     Msg.postData(res, false, '系统错误', '');
                 };
-                Msg.postData(res, true, 'success', '/articlelist');
+                Msg.postData(res, true, 'success', '/home/articlelist');
             });
 
         } else {
@@ -41,7 +41,7 @@ let article = {
                             console.log(err);
                             Msg.postData(res, false, '系统错误', '');
                         } else {
-                            Msg.postData(res, true, 'success', '/articlelist');
+                            Msg.postData(res, true, 'success', '/home/articlelist');
                         }
                     });
                 };
@@ -68,9 +68,9 @@ let show = {
             if (getParams.cur_count > 1) {
 
                 let getCount = (getParams.cur_count - 1) * getParams.page_count;
-                console.log(getCount);
+                // console.log(getCount);
 
-                ModelArticle.find({ uid: getParams.uid }, { title: 1, createTime: 1, author: 1 }).skip(getCount).limit(getParams.page_count).sort("-createTime").exec((err, data) => {
+                ModelArticle.find({ uid: getParams.uid }, { title: 1, updateTime: 1, author: 1 }).skip(getCount).limit(getParams.page_count).sort("-updateTime").exec((err, data) => {
                     if (err) {
                         Msg.postData(res, false, '系统错误', '');
                     };
@@ -78,7 +78,7 @@ let show = {
                     let newDate = [];
                     data.forEach((item) => {
                         let itemObj = {};
-                        itemObj.date = moment(item.createTime).format('YYYY-MM-DD');
+                        itemObj.date = moment(item.updateTime).format('YYYY-MM-DD');
                         itemObj.address = item.title;
                         itemObj.name = item.author;
                         itemObj._id = item._id;
@@ -95,7 +95,7 @@ let show = {
 
             } else {
 
-                ModelArticle.find({ uid: getParams.uid }, { title: 1, createTime: 1, author: 1 }).limit(getParams.page_count).sort("-createTime").exec((err, data) => {
+                ModelArticle.find({ uid: getParams.uid }, { title: 1, updateTime: 1, author: 1 }).limit(getParams.page_count).sort("-updateTime").exec((err, data) => {
                     if (err) {
                         Msg.postData(res, false, '系统错误', '');
                     };
@@ -103,7 +103,7 @@ let show = {
                     let newDate = [];
                     data.forEach((item) => {
                         let itemObj = {};
-                        itemObj.date = moment(item.createTime).format('YYYY-MM-DD');
+                        itemObj.date = moment(item.updateTime).format('YYYY-MM-DD');
                         itemObj.address = item.title;
                         itemObj.name = item.author;
                         itemObj._id = item._id;
@@ -119,6 +119,38 @@ let show = {
                 });
             }
 
+        });
+        // end
+    },
+    date(req, res, next) {
+        let postParams = req.body;
+        console.log(postParams);
+        let fn = function(_data) {};
+
+        ModelArticle.find({ uid: postParams.uid, updateTime: { $lte: postParams.date } }).sort("-updateTime").limit(4).exec((err, doc) => {
+            if (err) {
+                console.log(err);
+                Msg.postData(res, false, '系统错误', '');
+            };
+            console.log(doc);
+            let resJson = [],
+                arrAll = {};
+            doc.forEach((item) => {
+                let temp = {};
+                temp.updateTime = moment(item.updateTime).format('YYYY-MM-DD');
+                resJson.push(temp);
+            });
+
+            resJson.forEach((item) => {
+                let temp = item.updateTime;
+                if (!arrAll[temp]) {
+                    arrAll[temp] = 1;
+                } else {
+                    arrAll[temp]++;
+                };
+            });
+
+            Msg.postData(res, true, 'success', '', arrAll);
         });
         // end
     }
@@ -155,7 +187,7 @@ let del = {
                 Msg.postData(res, false, '系统错误', '');
             };
 
-            Msg.postData(res, true, 'success', '',doc);
+            Msg.postData(res, true, 'success', '', doc);
         });
     },
     all(req, res, next) {

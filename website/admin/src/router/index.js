@@ -16,16 +16,16 @@ export default new Router({
                     component: resolve => require(['../components/page/Admin.vue'], resolve)
                 },
                 {
-                    path: '/articlelist',
+                    path: 'articlelist',
                     component: resolve => require(['../components/page/ArticleList.vue'], resolve),
                 },
                 {
-                    path: '/article',
+                    path: 'article',
                     component: resolve => require(['../components/page/Article.vue'], resolve)
                 },
                 {
                     name: 'edit',
-                    path: '/articleedit/:cid',
+                    path: 'articleedit/:cid',
                     component: resolve => require(['../components/page/Articleedit.vue'], resolve)
                 },
                 // end
