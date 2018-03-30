@@ -81,23 +81,16 @@
         created() {
             this.getData();
         },
+       
         mounted() {
+            let that = this;
             this.$nextTick(() => {
-                let that = this,
-                    ch = document.clientHeight,
+                
+                let ch = document.documentElement.clientWidth,
                     cur = document.getElementById("line");
-
-                cur.width = document.documentElement.clientHeight;
-                console.log(window.innerWidth);
-
-                
-                that.clientHeight = document.documentElement.clientHeight;
-                console.log( that.clientHeight);
-                // 然后监听window的resize事件．在浏览器窗口变化时再设置下背景图高度．
-                
-                // window.onresize = function () {
-                //     that.clientHeight = ch + 'px';
-                // };
+                console.log(ch);
+                that.clientHeight = ch/3*2;
+                cur.width = that.clientHeight;
                 
             })
         }

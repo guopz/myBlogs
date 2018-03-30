@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Know More</title>
+  <subtitle>好记性不如烂笔头</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-04-19T07:21:06.135Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>月伴</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GIT 搭建静态博客 - Hexo</title>
+    <link href="http://yoursite.com/2017/04/18/GIT-Hexo/"/>
+    <id>http://yoursite.com/2017/04/18/GIT-Hexo/</id>
+    <published>2017-04-18T11:13:29.000Z</published>
+    <updated>2017-04-19T07:21:06.135Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="GIT-搭建静态博客-Hexo"><a href="#GIT-搭建静态博客-Hexo" class="headerlink" title="GIT 搭建静态博客 - Hexo"></a>GIT 搭建静态博客 - Hexo</h2><p>首先你需要准备的是 你的电脑已经安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1. Node</div><div class="line">2. Git</div><div class="line">3. Hexo</div><div class="line">4. Github 账号</div></pre></td></tr></table></figure></p>
+<p>个人环境 参考<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">* Node v5.7.1</div><div class="line">* npm 3.6.0</div><div class="line">* hexo@3.2.2</div></pre></td></tr></table></figure></p>
+<p>参考博客 - <a href="http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html" target="_blank" rel="external">时光机</a></p>
+<blockquote>
+<p>当然你可以选择其他的，在这里我选择的是 <code>Hexo</code> ，不过你也可以选择 <code>jekyll</code><br>相比较而言 <code>Hexo</code>更轻量一些，生成的文章速度更快，用CMS 的同学一定知道，文章生成的痛苦，文章越多生成越慢，而不幸的是静态博客只能全站生成。</p>
+</blockquote>
+<p>注意事项</p>
+<blockquote>
+<p>1.很多命令既可以用Windows的cmd来完成，也可以使用 <code>git bash</code> 来完成，但是部分命令会有一些问题，为避免不必要的问题，建议全部使用<code>git bash</code>来执行<br>2.hexo不同版本差别比较大，网上很多文章的配置信息都是基于2.x的，所以注意不要被误导；<br>3.hexo有2种<code>_config.yml</code>文件，一个是根目录下的全局的<code>_config.yml</code>，一个是各个theme下的；</p>
+</blockquote>
+<h4 id="1-创建-Hexo"><a href="#1-创建-Hexo" class="headerlink" title="1.创建 Hexo"></a>1.创建 Hexo</h4><a id="more"></a>
+<p>因为我应经安转好了 Node 和 Git ，所以我就直接安转 Hexo</p>
+<blockquote>
+<p>npm install -g hexo</p>
+</blockquote>
+<p>我这里是 进行了全局安装 -g，进入到 项目目录（H/Git/Hexo）初始化</p>
+<blockquote>
+<p>hexo init</p>
+</blockquote>
+<p>初始化完成后<br><img src="/img/h_1.png" alt="Alt text"></p>
+<p>当前面目录结构为<br><img src="/img/h_2.png" alt="Alt text"></p>
+<p>到此为止，恭喜你 Hexo已经安转完成了，接下来我们看下使用效果，<code>在你当前目录下</code>运行</p>
+<blockquote>
+<p>hexo server</p>
+</blockquote>
+<p><img src="/img/h_3.png" alt="Alt text"></p>
+<p>看下一下我们的劳动成果吧！<br><img src="/img/h_4.png" alt="Alt text"></p>
+<p>ok已经启动了！</p>
+<h4 id="2-开始写一篇-文章"><a href="#2-开始写一篇-文章" class="headerlink" title="2.开始写一篇 文章"></a>2.开始写一篇 文章</h4><p>重新打开一个Git窗口（之前的那个别动，因为服务还在运行）</p>
+<blockquote>
+<p>hexo new “My First Article”</p>
+</blockquote>
+<p>回到浏览器 刷新<br><img src="/img/h_5.png" alt="Alt text"></p>
+<p><code>__dirname \source\_posts</code> 查看 我们已添加的两篇文章<br><img src="/img/h_6.png" alt="Alt text"></p>
+<p>修改文章，直接修改 md 文件然后保存就ok了<br><img src="/img/h_7.png" alt="Alt text"></p>
+<p>刷新浏览器 md 文件使用<code>markdown</code>语法编写的，不熟悉的朋友可以学习一下，非常方便<br><img src="/img/h_8.png" alt="Alt text"></p>
+<p>生成静态的网站文件</p>
+<blockquote>
+<p>hexo generate</p>
+</blockquote>
+<p>当前目录下会生成一个 <code>\public</code>文件夹</p>
+<h4 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h4><p>首先在Git 上新建一个仓库</p>
+<blockquote>
+<p>仓库名为：<code>用户名.github.io</code><br>必须为用户名</p>
+</blockquote>
+<p>然后回到本地 Hexo 文件下 查找 <code>_config.yml</code>配置文件 修改</p>
+<blockquote>
+<p>deploy:<br>  type: git<br>  repository: git@github.com:你的帐号/你的帐号.github.com.git<br>  例如：repository: git@github.com:guopz/guopz.github.io.git<br>  branch: master</p>
+</blockquote>
+<p>上传 命令 <code>hexo d</code><br><img src="/img/h_9.png" alt="Alt text"></p>
+<p>需要安装插件</p>
+<blockquote>
+<p>npm install hexo-deployer-git –save</p>
+</blockquote>
+<hr>
+<p>常见使用命令</p>
+<blockquote>
+<p>hexo clean<br>hexo generate == hexo g<br>hexo deploy == hexo d<br>hexo server == hexo s<br> hexo new == hexo n</p>
+</blockquote>
+<p>此时，在博客的根目录下会生成一个文件夹：.deploy</p>
+<p>然后我们把这个文件夹里面的文件都push到刚才新建那个项目就OK了。几分钟过后，就可以打开你的用户名.github.io看到你的博客了。</p>
+<h4 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h4><p> hexo-theme-yilia：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia</a><br>hexo-theme-next：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">http://theme-next.iissnan.com/getting-started.html</a></p>
+<blockquote>
+<p><code>__diename</code>  文件夹下<br>git clone <a href="https://github.com/litten/hexo-theme-yilia.git" target="_blank" rel="external">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia<br>git clone <a href="https://github.com/iissnan/hexo-theme-next.git" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next.git</a> themes/next</p>
+</blockquote>
+<p>生成静态文件</p>
+<blockquote>
+<p>hexo g</p>
+</blockquote>
+<p>如果之前有其他主题的文章可以先</p>
+<blockquote>
+<p>hexo clean</p>
+</blockquote>
+<hr>
+<p>快捷键</p>
+<blockquote>
+<p>hexo g == hexo generate<br>hexo d == hexo deploy<br>hexo s == hexo server<br>hexo n == hexo new</p>
+</blockquote>
+<h3 id="以上方法是需要配置SSH"><a href="#以上方法是需要配置SSH" class="headerlink" title="以上方法是需要配置SSH"></a>以上方法是需要配置SSH</h3><p><code>如果没有配置的话，手动把 public生成一个仓库，进行push</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;GIT-搭建静态博客-Hexo&quot;&gt;&lt;a href=&quot;#GIT-搭建静态博客-Hexo&quot; class=&quot;headerlink&quot; title=&quot;GIT 搭建静态博客 - Hexo&quot;&gt;&lt;/a&gt;GIT 搭建静态博客 - Hexo&lt;/h2&gt;&lt;p&gt;首先你需要准备的是 你的电脑已经安装&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1. Node&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2. Git&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3. Hexo&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4. Github 账号&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;个人环境 参考&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;* Node v5.7.1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;* npm 3.6.0&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;* hexo@3.2.2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;参考博客 - &lt;a href=&quot;http://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html&quot;&gt;时光机&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;当然你可以选择其他的，在这里我选择的是 &lt;code&gt;Hexo&lt;/code&gt; ，不过你也可以选择 &lt;code&gt;jekyll&lt;/code&gt;&lt;br&gt;相比较而言 &lt;code&gt;Hexo&lt;/code&gt;更轻量一些，生成的文章速度更快，用CMS 的同学一定知道，文章生成的痛苦，文章越多生成越慢，而不幸的是静态博客只能全站生成。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;注意事项&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1.很多命令既可以用Windows的cmd来完成，也可以使用 &lt;code&gt;git bash&lt;/code&gt; 来完成，但是部分命令会有一些问题，为避免不必要的问题，建议全部使用&lt;code&gt;git bash&lt;/code&gt;来执行&lt;br&gt;2.hexo不同版本差别比较大，网上很多文章的配置信息都是基于2.x的，所以注意不要被误导；&lt;br&gt;3.hexo有2种&lt;code&gt;_config.yml&lt;/code&gt;文件，一个是根目录下的全局的&lt;code&gt;_config.yml&lt;/code&gt;，一个是各个theme下的；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;1-创建-Hexo&quot;&gt;&lt;a href=&quot;#1-创建-Hexo&quot; class=&quot;headerlink&quot; title=&quot;1.创建 Hexo&quot;&gt;&lt;/a&gt;1.创建 Hexo&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="博客搭建" scheme="http://yoursite.com/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="HEXO" scheme="http://yoursite.com/tags/HEXO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HEXO-NEXT</title>
+    <link href="http://yoursite.com/2017/03/13/HEXO-NEXT/"/>
+    <id>http://yoursite.com/2017/03/13/HEXO-NEXT/</id>
+    <published>2017-03-13T10:21:25.000Z</published>
+    <updated>2017-04-19T07:11:19.986Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="HEXO-NEXT"><a href="#HEXO-NEXT" class="headerlink" title="HEXO-NEXT"></a>HEXO-NEXT</h3><blockquote>
+<p>主体官网 - <a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="external">时光机</a></p>
+</blockquote>
+<h4 id="Hexo-中有两份主要的配置文件"><a href="#Hexo-中有两份主要的配置文件" class="headerlink" title="Hexo 中有两份主要的配置文件"></a>Hexo 中有两份主要的配置文件</h4><ul>
+<li><p>在站点配置 文件在根目录下</p>
+<blockquote>
+<p>_config.yml</p>
+</blockquote>
+</li>
+<li><p>主题配置文件 在主体目录下</p>
+<blockquote>
+<p> _config.yml</p>
+</blockquote>
+</li>
+</ul>
+<p>新建一个标签页 模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page tags</div></pre></td></tr></table></figure></p>
+<h4 id="目录解读"><a href="#目录解读" class="headerlink" title="目录解读"></a>目录解读</h4><p><code>| -- public</code><br><code>| -- scaffolds</code><br><code>| -- source</code><br>&emsp;&emsp;<code>|-- _posts</code><br>&emsp;&emsp;<code>|-- tags</code><br>&emsp;&emsp;<code>|-- categories</code><br><code>| -- themes</code><br><code>| -- _config.yml</code><br><code>| -- package.json</code><br><a id="more"></a></p>
+<h4 id="public"><a href="#public" class="headerlink" title="public"></a>public</h4><blockquote>
+<p>当我们启动hexo 服务时，public下 是当前我们我们 文章静态文件的生成目录，类似使用 vue-cli 的 build 打包文件</p>
+</blockquote>
+<h4 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h4><blockquote>
+<p>scaffolds是“脚手架、骨架”的意思，当你新建一篇文章（hexo new ‘ceshi’）的时候，hexo是根据这个目录下的文件进行构建的。基本不用关心。</p>
+</blockquote>
+<h4 id="source"><a href="#source" class="headerlink" title="source"></a>source</h4><p><code>_posts</code> 目录是文章的 markdown 文件。你应该可以看到一个 hello-world.md 的文件，文章就在这个文件中编辑。md文件最后会被编译成html文件 ，放到 <code>public</code>夹下。<br><code>tags</code>自己选择安装的 标签 文件<br><code>categories</code> 同上</p>
+<h4 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h4><p>网站主题目录，该目录下，每一个子目录就是一个主题，每一个主题都有一个  <code>_config.yml</code> 主题配置文件</p>
+<h4 id="标签-和-归档-显示数量-错误"><a href="#标签-和-归档-显示数量-错误" class="headerlink" title="标签 和 归档 显示数量 错误"></a>标签 和 归档 显示数量 错误</h4><p>题主尝试下如下解决方案：<br>先移除博客根目录下的.deploy_git文件夹和db.json文件，然后清理下 public 目录下的categories 和 tags 两个文件夹里的文件，然后重新部署静态博客：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hexo clean     #清除缓存</div><div class="line">hexo g         #生成静态网页</div><div class="line">hexo s         #启动服务预览</div><div class="line">hexo d         #开始部署</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>其实官网也有介绍  – <a href="http://theme-next.iissnan.com/faqs.html#read-more" target="_blank" rel="external">时光机</a></p>
+</blockquote>
+<h4 id="用Next主题搭建起来的博客，在底部会有一个特别烦人的官方logo"><a href="#用Next主题搭建起来的博客，在底部会有一个特别烦人的官方logo" class="headerlink" title="用Next主题搭建起来的博客，在底部会有一个特别烦人的官方logo"></a>用Next主题搭建起来的博客，在底部会有一个特别烦人的官方logo</h4><p>解决方案</p>
+<blockquote>
+<p>1.首先，找到 <code>\themes\next\layout\_partials\</code>下面的footer.swig文件，打开会发现，如下图的语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;copyright&quot; &gt;</div><div class="line">  &#123;% set current = date(Date.now(), &quot;YYYY&quot;) %&#125;</div><div class="line">  &amp;copy; &#123;% if theme.since and theme.since != current %&#125; &#123;&#123; theme.since &#125;&#125; - &#123;% endif %&#125;</div><div class="line">  &lt;span itemprop=&quot;copyrightYear&quot;&gt;&#123;&#123; current &#125;&#125;&lt;/span&gt;</div><div class="line">  &lt;span class=&quot;with-love&quot;&gt;</div><div class="line">    &lt;i class=&quot;fa fa-&#123;&#123; theme.authoricon &#125;&#125;&quot;&gt;&lt;/i&gt;</div><div class="line">  &lt;/span&gt;</div><div class="line">  &lt;span class=&quot;author&quot; itemprop=&quot;copyrightHolder&quot;&gt;Powered By - &#123;&#123; config.author &#125;&#125;&lt;/span&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&#123;% if theme.copyright %&#125;</div><div class="line">&lt;div class=&quot;powered-by&quot;&gt;</div><div class="line">  &#123;&#123; __(&apos;footer.powered&apos;, &apos;&apos;) &#125;&#125;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;div class=&quot;theme-info&quot;&gt;</div><div class="line">  &#123;&#123; __(&apos;footer.theme&apos;) &#125;&#125; -</div><div class="line">  &lt;a class=&quot;theme-link&quot; href=&quot;https://github.com/guopz&quot;&gt;</div><div class="line">   &#123;&#123; config.author &#125;&#125;</div><div class="line">  &lt;/a&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>根据页面的 debug 可以查看需要修改的部分，这是我修改好的，可以纯静态也可以找到这个地方 <code>\themes\next\languages\</code>下面的语言文件zh-Hans.yml（这里以中文为例，有的习惯用英文的配置文件，道理一样，找对应位置即可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">footer:</div><div class="line">  powered: &quot; %s 个人博客&quot;</div><div class="line">  theme: Github</div></pre></td></tr></table></figure>
+<p>修改完成，因为本地图片问题还没解决，所以没有上图，后期会修改添加的。</p>
+<h4 id="使用Hexo-插入图片"><a href="#使用Hexo-插入图片" class="headerlink" title="使用Hexo 插入图片"></a>使用Hexo 插入图片</h4><p>我们常用的两种方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. 使用七牛 服务器，调用url链接</div><div class="line">2. 使用本地图片 在 `source` 添加一个 img 文件夹，引用的时候 </div><div class="line">   ![Alt text](/img/logo_108.png)</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;HEXO-NEXT&quot;&gt;&lt;a href=&quot;#HEXO-NEXT&quot; class=&quot;headerlink&quot; title=&quot;HEXO-NEXT&quot;&gt;&lt;/a&gt;HEXO-NEXT&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;主体官网 - &lt;a href=&quot;http://theme-next.iissnan.com/getting-started.html&quot;&gt;时光机&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;Hexo-中有两份主要的配置文件&quot;&gt;&lt;a href=&quot;#Hexo-中有两份主要的配置文件&quot; class=&quot;headerlink&quot; title=&quot;Hexo 中有两份主要的配置文件&quot;&gt;&lt;/a&gt;Hexo 中有两份主要的配置文件&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在站点配置 文件在根目录下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;_config.yml&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;主题配置文件 在主体目录下&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt; _config.yml&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;新建一个标签页 模板&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;hexo new page tags&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&quot;目录解读&quot;&gt;&lt;a href=&quot;#目录解读&quot; class=&quot;headerlink&quot; title=&quot;目录解读&quot;&gt;&lt;/a&gt;目录解读&lt;/h4&gt;&lt;p&gt;&lt;code&gt;| -- public&lt;/code&gt;&lt;br&gt;&lt;code&gt;| -- scaffolds&lt;/code&gt;&lt;br&gt;&lt;code&gt;| -- source&lt;/code&gt;&lt;br&gt;&amp;emsp;&amp;emsp;&lt;code&gt;|-- _posts&lt;/code&gt;&lt;br&gt;&amp;emsp;&amp;emsp;&lt;code&gt;|-- tags&lt;/code&gt;&lt;br&gt;&amp;emsp;&amp;emsp;&lt;code&gt;|-- categories&lt;/code&gt;&lt;br&gt;&lt;code&gt;| -- themes&lt;/code&gt;&lt;br&gt;&lt;code&gt;| -- _config.yml&lt;/code&gt;&lt;br&gt;&lt;code&gt;| -- package.json&lt;/code&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="博客搭建" scheme="http://yoursite.com/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="HEXO" scheme="http://yoursite.com/tags/HEXO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2017/03/13/hello-world/"/>
+    <id>http://yoursite.com/2017/03/13/hello-world/</id>
+    <published>2017-03-13T06:30:32.532Z</published>
+    <updated>2017-03-13T06:30:32.532Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

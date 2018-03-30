@@ -28,6 +28,11 @@ export default new Router({
                     path: 'articleedit/:cid',
                     component: resolve => require(['../components/page/Articleedit.vue'], resolve)
                 },
+                {
+                    name: 'classify',
+                    path: 'classify',
+                    component: resolve => require(['../components/page/Classify.vue'], resolve)
+                },
                 // end
                 {
                     path: '/basetable',
