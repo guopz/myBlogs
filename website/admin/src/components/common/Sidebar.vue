@@ -39,6 +39,11 @@
                         index: '/home/article',
                         title: '发布文章'
                     },
+                    {
+                        icon: 'el-icon-star-on',
+                        index: '/home/classify',
+                        title: '文章分类'
+                    },
                     // {
                     //     icon: 'el-icon-menu',
                     //     index: '2',
