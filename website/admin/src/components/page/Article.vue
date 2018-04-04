@@ -14,6 +14,19 @@
                     </div>
                 </el-form-item>
                 
+                <el-form-item label="文章分类">
+                    <div class="ipt">
+                         <el-select v-model="form.value" placeholder="请选择">
+                            <el-option
+                            v-for="item in options"
+                            :key="item.name"
+                            :label="item.name"
+                            :value="item.aid">
+                            </el-option>
+                        </el-select>
+                    </div>
+                </el-form-item>
+
                 <el-form-item label="来源">
                     <div class="ipt">
                         <el-input v-model="form.b_source" placeholder="未知"></el-input>
@@ -75,7 +88,24 @@
                     d_desc: '',
                     dynamicTags: ['日常记录','生活'],
                     uid: '',
+                    value: ''
                 },
+                options: [{
+                    value: '选项1',
+                    label: '黄金糕'
+                    }, {
+                    value: '选项2',
+                    label: '双皮奶'
+                    }, {
+                    value: '选项3',
+                    label: '蚵仔煎'
+                    }, {
+                    value: '选项4',
+                    label: '龙须面'
+                    }, {
+                    value: '选项5',
+                    label: '北京烤鸭'
+                }],
                 errorInfrom: {
                     a_title: '请填写文章标题',
                     b_source: '请填写文章来源',
@@ -95,6 +125,9 @@
                 }
             }
         },
+        created() {
+            this.getData();
+        },
         methods: {
             onSubmit() {
                 const self = this;
@@ -103,7 +136,7 @@
                     self.$router.push('/login');
                 };
                 self.form.uid = username._id;
-                // console.log(username);
+                console.log(this.form);
                 for(let name in this.form) {
                     let val = this.form[name]
                    if (!val) {
@@ -149,6 +182,22 @@
 
             onCancle() {
                 this.form = {};
+            },
+
+            getData() {
+                var self = this;
+                let username = JSON.parse(localStorage.getItem('ms_username'));
+                if (!username || !username._id) {
+                    self.$router.push('/login');
+                };
+                self.$axios.post(self.$url.classify, {uid: username._id}).then((res) => {
+                    let result = res.data;
+                    console.log(result);
+                    if(result.status) {
+                        self.options = result.data.data;
+                        console.log(self.options);
+                    }
+                });
             }
         },
         components: {

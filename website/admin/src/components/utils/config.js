@@ -11,7 +11,9 @@ let config_url = {
         edit: 'list/edit',
         updata: 'list/updata',
         delall: 'list/delall',
-        date: 'list/date'
+        date: 'list/date',
+        classify: 'list/classify',
+        addclassify: 'list/addclassify'
     }
 };
 let config = {};
