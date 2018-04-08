@@ -7,6 +7,14 @@ var blogSchema = new Schema({
         type: ObjectId,
         ref: 'user'
     },
+    classify: {
+        name: String,
+        aid: {
+            type: ObjectId,
+            ref: 'classify'
+        }
+    },
+    digest: String,
     author: String,
     source: String,
     title: String,

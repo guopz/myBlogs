@@ -46,6 +46,10 @@
                     </el-input>
                     <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
                 </el-form-item>
+
+                <el-form-item label="文章摘要">
+                    <el-input type="textarea" v-model="form.c_zy"></el-input>
+                </el-form-item>
                 <!-- delete -->
                 <el-form-item label="文章内容">
                     <markdown-editor v-model="form.d_desc" :configs="configs" ref="markdownEditor"></markdown-editor>
@@ -73,6 +77,7 @@
                     b_source: '',
                     c_author: '',
                     d_desc: '',
+                    d_zy: '',
                     dynamicTags: ['日常记录','生活'],
                     uid: '',
                 },
@@ -81,6 +86,7 @@
                     b_source: '请填写文章来源',
                     c_author: '请填写文章作者',
                     d_desc: '请填写文章内容',
+                    c_zy: '请填写摘要',
                     uid:'退出后重新登录'
                 },
                 inputVisible: false,
@@ -160,6 +166,7 @@
                             d_desc: result.data.data.content,
                             dynamicTags: result.data.data.dynamicTags,
                             cid: result.data.data._id,
+                            c_zy: result.data.data.digest
                         }
                     } else {
                         self.$message.error(result.msg);

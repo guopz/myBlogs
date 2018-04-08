@@ -44,7 +44,7 @@
         methods: {
             getData() {
                 let self = this,
-                    nowdata = self.$moment(new Date()).format('YYYY-MM-DD'),
+                    nowdata = self.$moment(new Date()).add(1, 'days').format('YYYY-MM-DD'),
                     postParams = {},
                     username = JSON.parse(localStorage.getItem('ms_username'));
                 if (!username && !username._id) {
@@ -61,7 +61,7 @@
                         self.$message.error(res.msg);
                     };
                 };
-               
+                // console.log(postParams);
                 self.$axios.post(self.$url.date, postParams).then((res) => {
                     let result = res.data;
                     disposeData(result, (res) => {
@@ -88,7 +88,7 @@
                 
                 let ch = document.documentElement.clientWidth,
                     cur = document.getElementById("line");
-                console.log(ch);
+                // console.log(ch);
                 that.clientHeight = ch/3*2;
                 cur.width = that.clientHeight;
                 

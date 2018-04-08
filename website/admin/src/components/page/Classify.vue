@@ -79,10 +79,10 @@
                     uid: username._id,
                     list: self.dynamicTags
                 };
-                console.log(self.dynamicTags);
+                // console.log(self.dynamicTags);
                 self.$axios.post(self.$url.addclassify, sendParams).then((res) => {
                     let result = res.data;
-                    console.log(result);
+                    // console.log(result);
                     if(result.status) {
                         self.tags =  self.tags.concat(self.dynamicTags);
                         self.$message.success(result.msg);
@@ -117,7 +117,7 @@
                 };
                 self.$axios.post(self.$url.classify, {uid: username._id}).then((res) => {
                     let result = res.data;
-                    console.log(result);
+                    // console.log(result);
                     if(result.status) {
                         self.tags = result.data.data;
                     }

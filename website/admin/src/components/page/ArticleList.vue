@@ -59,7 +59,7 @@
                 page: {
                     count: 0,
                     cur_page: 1,
-                    page_count: 2
+                    page_count: 4
                 }
             }
         },

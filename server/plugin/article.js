@@ -12,7 +12,10 @@ let article = {
             dynamicTags: req.body.dynamicTags,
             content: req.body.d_desc,
             uid: req.body.uid,
+            classify: req.body.classify,
+            digest: req.body.c_zy
         };
+        console.log(postDate);
         if (req.body.cid) {
 
             ModelArticle.updateOne({ _id: req.body.cid }, { $set: postDate }, (err, doc) => {
@@ -64,26 +67,39 @@ let show = {
             if (err) {
                 Msg.postData(res, false, '系统错误', '');
             };
-            getParams.page_count = getParams.page_count ? getParams.page_count : 1;
-            if (getParams.cur_count > 1) {
+            
+            // Find 参数
+            getParams.page_count = getParams.page_count ? getParams.page_count : 8;
+            getParams.cur_count = getParams.cur_count ? getParams.cur_count : 1;
 
-                let getCount = (getParams.cur_count - 1) * getParams.page_count;
-                // console.log(getCount);
-
-                ModelArticle.find({ uid: getParams.uid }, { title: 1, updateTime: 1, author: 1 }).skip(getCount).limit(getParams.page_count).sort("-updateTime").exec((err, data) => {
-                    if (err) {
-                        Msg.postData(res, false, '系统错误', '');
-                    };
-
-                    let newDate = [];
-                    data.forEach((item) => {
+            let param1 = { uid: getParams.uid },
+                param2 = { title: 1, updateTime: 1, author: 1, digest:1, classify:1 },
+                editData = function (_doc, _temp) { 
+                    _doc.forEach((item) => {
                         let itemObj = {};
                         itemObj.date = moment(item.updateTime).format('YYYY-MM-DD');
                         itemObj.address = item.title;
                         itemObj.name = item.author;
                         itemObj._id = item._id;
-                        newDate.push(itemObj);
+                        itemObj.digest = item.digest;
+                        itemObj.classify = item.classify;
+                        _temp.push(itemObj);
                     });
+                    return _temp;
+                };
+                
+            if (getParams.cur_count > 1) {
+                
+                let getCount = (getParams.cur_count - 1) * getParams.page_count;
+
+                ModelArticle.find(param1, param2).skip(getCount).limit(getParams.page_count).sort("-updateTime").exec((err, doc) => {
+                    if (err) {
+                        Msg.postData(res, false, '系统错误', '');
+                    };
+                    
+                    let newDate = [];
+                    
+                    editData(doc, newDate);
 
                     pageJson.data = {
                         list: newDate,
@@ -94,22 +110,16 @@ let show = {
                 });
 
             } else {
-
-                ModelArticle.find({ uid: getParams.uid }, { title: 1, updateTime: 1, author: 1 }).limit(getParams.page_count).sort("-updateTime").exec((err, data) => {
+                
+                ModelArticle.find(param1, param2).limit(getParams.page_count).sort("-updateTime").exec((err, doc) => {
                     if (err) {
                         Msg.postData(res, false, '系统错误', '');
                     };
-
+                    
                     let newDate = [];
-                    data.forEach((item) => {
-                        let itemObj = {};
-                        itemObj.date = moment(item.updateTime).format('YYYY-MM-DD');
-                        itemObj.address = item.title;
-                        itemObj.name = item.author;
-                        itemObj._id = item._id;
-                        newDate.push(itemObj);
-                    });
 
+                    editData(doc, newDate);
+                    
                     pageJson.data = {
                         list: newDate,
                         count: count,
@@ -127,12 +137,12 @@ let show = {
         console.log(postParams);
         let fn = function(_data) {};
 
-        ModelArticle.find({ uid: postParams.uid, updateTime: { $lte: postParams.date } }).sort("-updateTime").limit(4).exec((err, doc) => {
+        ModelArticle.find({ uid: postParams.uid, updateTime: { $lte: postParams.date } }).sort("-updateTime").exec((err, doc) => {
             if (err) {
                 console.log(err);
                 Msg.postData(res, false, '系统错误', '');
             };
-            console.log(doc);
+            console.log('Char 数据 \n',doc);
             let resJson = [],
                 arrAll = {};
             doc.forEach((item) => {
