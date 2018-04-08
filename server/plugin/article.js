@@ -1,4 +1,5 @@
 let ModelArticle = require("../model/article"),
+    ModelClassify = require("../model/classify"),
     Msg = require("../model/msg"),
     moment = require('moment');
 
@@ -15,7 +16,7 @@ let article = {
             classify: req.body.classify,
             digest: req.body.c_zy
         };
-        console.log(postDate);
+        // console.log(postDate);
         if (req.body.cid) {
 
             ModelArticle.updateOne({ _id: req.body.cid }, { $set: postDate }, (err, doc) => {
@@ -38,15 +39,32 @@ let article = {
                 if (data) {
                     Msg.postData(res, false, '文章标题已存在！', '');
                 } else {
+                    let aid = postDate.classify.aid;
                     ModelArticle.create(postDate, function(err, data) {
-
                         if (err) {
                             console.log(err);
                             Msg.postData(res, false, '系统错误', '');
                         } else {
+                            // console.log(aid);
+                            ModelArticle.find({'classify.aid': aid}).count().exec((err, doc) => {
+                                if (err) {
+                                    console.log(err);
+                                    Msg.postData(res, false, 'error');
+                                };
+                                // console.log('发布文章 ',doc, postDate);
+                                ModelClassify.updateOne({_id: aid}, {$set: {count: doc}}).exec((err, doc)=>{
+                                    if (err) {
+                                        console.log(err);
+                                        Msg.postData(res, false, 'error');
+                                    };
+                                    console.log('写入 ',doc);  
+                                });
+                                
+                            });
                             Msg.postData(res, true, 'success', '/home/articlelist');
                         }
                     });
+
                 };
             });
         }

@@ -9,6 +9,8 @@ var express = require('express'),
 
 var article = require('./routes/article'),
     user = require('./routes/user');
+    home = require('./routes/home');
+
 mongoose.connect('mongodb://localhost/myblog');
 app.use(session({
     secret: 'iqjmvh-178fd-fwh9f-cfenp',
@@ -33,6 +35,7 @@ var allowCrossDomain = function(req, res, next) {
 app.use(allowCrossDomain);
 app.use('/list', article);
 app.use('/user', user);
+app.use('/home', home);
 
 var port = 3030;
 var server = app.listen(port, function() {

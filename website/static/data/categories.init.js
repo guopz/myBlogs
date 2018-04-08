@@ -2,7 +2,7 @@
  * @Author: GH 
  * @Date: 2018-04-06 18:34:06 
  * @Last Modified by: GH
- * @Last Modified time: 2018-04-07 00:26:32
+ * @Last Modified time: 2018-04-08 22:39:43
  */
 
 var categorie = {
@@ -11,7 +11,7 @@ var categorie = {
     },
     static() {
         let url = {
-            show: '../list/show',
+            show: '../home/categorie',
         };
         return {
             url
@@ -67,9 +67,7 @@ var categorie = {
                             </article>`;
                 return listhtml;
         }
-        $.post(u.show, {
-            uid: '5ab66de03e5c3603085259b6'
-        }, (res) => {
+        $.get(u.show, (res) => {
             let html = '',
                 result = res.data.list;
             console.log(result);

@@ -8,6 +8,10 @@ var blogSchema = new Schema({
         ref: 'user'
     },
     name: String,
+    count: {
+        type: Number,
+        default: 0
+    },
     type: {
         type: String,
         default: 'success'
