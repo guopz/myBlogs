@@ -2,7 +2,7 @@ let mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     ObjectId = Schema.Types.ObjectId;
 
-var blogSchema = new Schema({
+var classifySchema = new Schema({
     uid: {
         type: ObjectId,
         ref: 'user'
@@ -22,4 +22,4 @@ var blogSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('classify', blogSchema);
+module.exports = mongoose.model('classify', classifySchema);

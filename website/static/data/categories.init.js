@@ -21,13 +21,16 @@ var categorie = {
         let u = this.static().url;
         console.log(u);
         let tpl = function(_data) {
-            let tplhtml = `<li class="category-list-item"><a class="category-list-link" href="/categories/reading-list/">${_data.name}</a><span class="category-list-count">${_data.count}</span></li>`;
-            return tplhtml;
+            let listhtml = `<li class="category-list-item">
+                                <a class="category-list-link" href="javascript:void(0);">${_data.name}</a>
+                                <span class="category-list-count">${_data.count}</span>
+                            </li>`;
+                return listhtml;
         }
         $.get(u.show, (res) => {
             let html = '',
                 result = res.data.data;
-            console.log(result);
+            
             result.forEach(item => {
                 html += tpl(item);
                 $('.category_list_hook').html(html);

@@ -2,7 +2,7 @@ let mongoose = require("mongoose"),
     Schema = mongoose.Schema,
     ObjectId = Schema.Types.ObjectId;
 
-var blogSchema = new Schema({
+var articleSchema = new Schema({
     uid: {
         type: ObjectId,
         ref: 'user'
@@ -33,4 +33,4 @@ var blogSchema = new Schema({
     timestamps: { createdAt: 'createTime', updatedAt: 'updateTime' }
 });
 
-module.exports = mongoose.model('article', blogSchema);
+module.exports = mongoose.model('article', articleSchema);

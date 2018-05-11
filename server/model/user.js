@@ -7,6 +7,10 @@ let userSchema = new Schema({
         unique: true // 禁止重复
     },
     password: String,
+    alias: {
+        type: String,
+        unique: true // 禁止重复
+    },
     createTime: {
         type: Date,
         default: Date.now
